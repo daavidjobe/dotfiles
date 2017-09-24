@@ -2,10 +2,7 @@ set nocompatible
 
 call plug#begin('~/.local/share/nvim/plugged')
   
-  if (has('nvim'))
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  endif
-
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'ervandew/supertab'
   Plug 'honza/vim-snippets'
   Plug 'ctrlpvim/ctrlp.vim'
