@@ -1,88 +1,65 @@
-" Don't try to be vi compatible
 set nocompatible
 
-" Helps force plugins to load correctly when it is turned back on below
-filetype off
+call plug#begin('~/.local/share/nvim/plugged')
+  
+  if (has('nvim'))
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  endif
 
-" To include bundles in runtime path
-execute pathogen#infect()
+  Plug 'ervandew/supertab'
+  Plug 'honza/vim-snippets'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'joshdick/onedark.vim'
+  Plug 'vim-airline/vim-airline'
+
+  " JavaScript
+  Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'pangloss/vim-javascript'
+  Plug 'othree/es.next.syntax.vim'
+  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'jason0x43/vim-js-indent'
+
+  " CSS
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'cakebaker/scss-syntax.vim'
+
+  " HTML
+  Plug 'mattn/emmet-vim'
+
+call plug#end()
 
 syntax enable
 
-" For plugins to load correctly
-filetype plugin indent on
-
-
-" Security
-set modelines=0
-
-" Show line numbers
+"Lines"
 set number
-
-" Share clipboard
-set clipboard=unnamedplus
-
-" Highlight current line
+set relativenumber
 set cursorline
 
-" Normal backspace
+"Normal backspace"
 set backspace=indent,eol,start
 
-" Show file stats
+"Show file stats"
 set ruler
 
-" Blink cursor on error instead of beeping (grr)
+"Blink cursor on error instead of beeping (grr)"
 set visualbell
 
-" Encoding
-set encoding=utf-8
-
-" Whitespace
-set wrap
-set textwidth=79
-set formatoptions=tcqrn1
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+"Indentatio"
 set expandtab
-set noshiftround
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 
-" Cursor motion
-set scrolloff=3
-set backspace=indent,eol,start
-set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
 
-" Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
 
-" Allow hidden buffers
-set hidden
+colorscheme onedark
 
-" Rendering
-set ttyfast
 
-" Status bar
-set laststatus=2
 
-" Last line
-set showmode
-set showcmd
 
-set ignorecase
-set smartcase
-set showmatch
-map <leader><space> :let @/=''<cr> " clear search
 
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
-
-" Formatting
-map <leader>q gqip
-
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
 
