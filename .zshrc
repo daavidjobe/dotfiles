@@ -5,6 +5,8 @@ export ZSH=/Users/david/.oh-my-zsh
 
 ZSH_THEME="agnoster"
 
+
+source ~/.bashrc
 source $ZSH/oh-my-zsh.sh
 
 ### Paths

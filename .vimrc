@@ -28,21 +28,21 @@ call plug#end()
 
 syntax enable
 
-"Lines"
+" Lines
 set number
 set relativenumber
 set cursorline
 
-"Normal backspace"
+" Normal backspace
 set backspace=indent,eol,start
 
-"Show file stats"
+" Show file stats
 set ruler
 
-"Blink cursor on error instead of beeping (grr)"
+" Blink cursor on error instead of beeping (grr)
 set visualbell
 
-"Indentatio"
+" Indentation
 set expandtab
 set tabstop=2
 set softtabstop=2
