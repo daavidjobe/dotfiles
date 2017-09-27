@@ -1,4 +1,4 @@
-alias config='/usr/bin/git --git-dir=/Users/david/.cfg/ --work-tree=/Users/david'
+alias config='/usr/bin/git --git-dir=/Users/$USER/.cfg/ --work-tree=/Users/$USER'
 
 alias v="~/.nvim/bin/nvim"
 
