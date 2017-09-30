@@ -1,22 +1,18 @@
 set nocompatible
 
-if (has('nvim'))
-  call plug#begin('~/.local/share/nvim/plugged')
-else
-  call plug#begin('~/.vim/plugged')
-endif
+call plug#begin('~/.local/share/nvim/plugged')
 
-if (has('nvim'))
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } 
-  Plug 'ervandew/supertab'
-endif
-  
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } 
+Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 
 " JavaScript
   
@@ -27,10 +23,12 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jason0x43/vim-js-indent'
 
 " CSS
+
 Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
 
 " HTML
+
 Plug 'mattn/emmet-vim'
 
 call plug#end()
@@ -38,35 +36,69 @@ call plug#end()
 syntax enable
 
 " Lines
+
 set number
-
-if (v:version > 700)
-  set relativenumber
-endif
-
+set relativenumber
 set cursorline
 
 " Normal backspace
+
 set backspace=indent,eol,start
 
 " Show file stats
+
 set ruler
 
+" Search
+
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+
 " Blink cursor on error instead of beeping (grr)
+
 set visualbell
 
 " Indentation
+
 set expandtab
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+:tnoremap <Esc> <C-\><C-n>
 
-"JS specific stuff
+" Navigation
 
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+nnoremap gj <C-w>j
+nnoremap gk <C-w>k
+nnoremap gl <C-w>l
+nnoremap gh <C-w>h
+
+" movement
+
+nnoremap gJ <C-w>J
+nnoremap gK <C-w>K
+nnoremap gL <C-w>L
+nnoremap gH <C-w>H
+nnoremap gR <C-w>R
+nnoremap gr <C-w>r
+
+" Panes
+
+nnoremap gn :split<cr>
+nnoremap gv :vsplit<cr>
+
+
+
+
+
+
+
+
+
 
 colorscheme onedark
 
