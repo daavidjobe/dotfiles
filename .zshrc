@@ -19,3 +19,6 @@ export GOROOT=/usr/local/opt/go/libexec
 export GOPATH="/Users/david/Projects/go"
 export PATH="$PATH:$GOPATH/bin"
 
+
+
+source "/Users/david/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
