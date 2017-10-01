@@ -91,15 +91,6 @@ nnoremap gr <C-w>r
 nnoremap gn :split<cr>
 nnoremap gv :vsplit<cr>
 
-
-
-
-
-
-
-
-
-
 colorscheme onedark
 
 

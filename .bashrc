@@ -8,3 +8,5 @@ ln -f ~/.vimrc ~/.config/nvim/init.vim
 # Work specific stuffs
 
 alias bokus-dev="ssh creunadavidj@mobil-dev.bokus.com"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
