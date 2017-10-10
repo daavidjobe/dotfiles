@@ -2,7 +2,7 @@
 # Setup
 
 
-ZSH_THEME="agnoster"
+ZSH_THEME="spaceship"
 export ZSH=/Users/david/.oh-my-zsh
 
 # Rust
@@ -28,5 +28,19 @@ plugins=(git)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source "/Users/david/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-source ~/.bashrc
 source $ZSH/oh-my-zsh.sh
+
+
+# Aliases
+alias config='/usr/bin/git --git-dir=/Users/$USER/.cfg/ --work-tree=/Users/$USER'
+alias v="~/.config/nvim/bin/nvim"
+
+
+# Mirror vim configs
+ln -sf .vim/ .config/nvim/
+ln -f ~/.vimrc ~/.config/nvim/init.vim
+
+
+# Work specific stuffs
+alias bokus-dev="ssh creunadavidj@mobil-dev.bokus.com"
+

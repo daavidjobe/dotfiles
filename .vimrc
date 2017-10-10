@@ -13,6 +13,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'sbdchd/neoformat'
 
 " JavaScript
   
@@ -21,6 +22,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jason0x43/vim-js-indent'
+Plug 'w0rp/ale'
 
 " CSS
 
@@ -93,4 +95,5 @@ nnoremap gv :vsplit<cr>
 
 colorscheme onedark
 
-
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
