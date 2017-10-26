@@ -23,6 +23,7 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jason0x43/vim-js-indent'
 Plug 'w0rp/ale'
+Plug 'elzr/vim-json'
 
 " CSS
 
@@ -93,7 +94,31 @@ nnoremap gr <C-w>r
 nnoremap gn :split<cr>
 nnoremap gv :vsplit<cr>
 
+" Colors
+
 colorscheme onedark
 
 " Use deoplete.
+
 let g:deoplete#enable_at_startup = 1
+
+" Linting
+
+let g:ale_fixers = {
+ \  'javascript': ['eslint'],
+ \}
+
+let g:ale_fix_on_save = 1
+
+" Show hidden files in NERDTree
+
+let NERDTreeShowHidden = 1
+
+" Disctraction free coding
+
+let g:goyo_width = 120
+
+
+
+
+
