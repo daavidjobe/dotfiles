@@ -25,6 +25,10 @@ Plug 'jason0x43/vim-js-indent'
 Plug 'w0rp/ale'
 Plug 'elzr/vim-json'
 
+" Elm
+Plug 'elmcast/elm-vim'
+
+
 " CSS
 
 Plug 'hail2u/vim-css3-syntax'
