@@ -13,7 +13,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'sbdchd/neoformat'
 
 " JavaScript
   
@@ -33,6 +32,12 @@ Plug 'cakebaker/scss-syntax.vim'
 " HTML
 
 Plug 'mattn/emmet-vim'
+
+" Rust
+
+Plug 'rust-lang/rust.vim'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 
@@ -138,4 +143,14 @@ nnoremap <leader>ff :CtrlP<space>
 " Disctraction free coding
 
 let g:goyo_width = 120
+
+" Rust
+
+let g:rustfmt_autosave = 1
+
+" TODO: Not working..
+let g:deoplete#sources#rust#racer_binary = system('which racer') 
+let g:deoplete#sources#rust#rust_source_path = "$HOME/Projects/rust/src"
+let g:deoplete#sources#rust#show_duplicates = 1
+let g:deoplete#sources#rust#documentation_max_height = 20
 
