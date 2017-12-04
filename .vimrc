@@ -13,7 +13,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'sbdchd/neoformat'
 
 " JavaScript
   
@@ -37,6 +36,12 @@ Plug 'cakebaker/scss-syntax.vim'
 " HTML
 
 Plug 'mattn/emmet-vim'
+
+" Rust
+
+Plug 'rust-lang/rust.vim'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 
@@ -77,6 +82,10 @@ set shiftwidth=2
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 :tnoremap <Esc> <C-\><C-n>
 
+
+" Leader
+ let mapleader = ';'
+
 " Navigation
 
 nnoremap gj <C-w>j
@@ -98,8 +107,6 @@ nnoremap gr <C-w>r
 nnoremap gn :split<cr>
 nnoremap gv :vsplit<cr>
 
-" Colors
-
 colorscheme onedark
 
 " Use deoplete.
@@ -114,15 +121,40 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 
-" Show hidden files in NERDTree
+" NERDTree
 
 let NERDTreeShowHidden = 1
+
+function! NERDTreeToggleInCurDir()
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    if (expand("%:t") != '')
+      exe ":NERDTreeFind"
+    else
+      exe ":NERDTreeToggle"
+    endif
+  endif
+endfunction
+
+nnoremap <leader>nf :call NERDTreeToggleInCurDir()<cr>
+nnoremap <leader>t :NERDTreeToggle<cr>
+
+" CtrlP
+
+nnoremap <leader>ff :CtrlP<space>
 
 " Disctraction free coding
 
 let g:goyo_width = 120
 
+" Rust
 
+let g:rustfmt_autosave = 1
 
-
+" TODO: Not working..
+let g:deoplete#sources#rust#racer_binary = system('which racer') 
+let g:deoplete#sources#rust#rust_source_path = "$HOME/Projects/rust/src"
+let g:deoplete#sources#rust#show_duplicates = 1
+let g:deoplete#sources#rust#documentation_max_height = 20
 
