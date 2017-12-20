@@ -140,9 +140,15 @@ endfunction
 nnoremap <leader>nf :call NERDTreeToggleInCurDir()<cr>
 nnoremap <leader>t :NERDTreeToggle<cr>
 
-" CtrlP
+" Searching
 
-nnoremap <leader>ff :CtrlP<space>
+if (executable('fzf'))
+  nnoremap <leader>ff :Ag<cr>
+  let g:fzf_layout = { 'down': '~20%' }
+  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+else
+  nnoremap <leader>ff :CtrlP<space>
+endif
 
 " Disctraction free coding
 
@@ -152,9 +158,8 @@ let g:goyo_width = 120
 
 let g:rustfmt_autosave = 1
 
-" TODO: Not working..
-let g:deoplete#sources#rust#racer_binary = system('which racer') 
-let g:deoplete#sources#rust#rust_source_path = "$HOME/Projects/rust/src"
+let g:deoplete#sources#rust#racer_binary = '/Users/david/.cargo/bin/racer' 
+let g:deoplete#sources#rust#rust_source_path = '/Users/david/Projects/rust/src'
 let g:deoplete#sources#rust#show_duplicates = 1
 let g:deoplete#sources#rust#documentation_max_height = 20
 
