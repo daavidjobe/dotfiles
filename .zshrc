@@ -43,5 +43,4 @@ ln -f ~/.vimrc ~/.config/nvim/init.vim
 
 
 # Work specific stuffs
-alias bokus-dev="ssh creunadavidj@mobil-dev.bokus.com"
-
+alias bokus-dev="ssh netdavidj@mobil-dev.bokus.com"

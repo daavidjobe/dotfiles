@@ -1,10 +1,10 @@
 set nocompatible
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } 
 Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
@@ -168,3 +168,10 @@ let g:deoplete#sources#rust#documentation_max_height = 20
 vnoremap < <gv
 vnoremap > >gv
 
+" Snippets
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:UltiSnipsEditSplit="vertical"
