@@ -225,9 +225,9 @@ let g:SuperTabCrMapping = 0
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
-let g:UltiSnipsSnippetsDir = "~/.config/nvim/snippets"
+let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 let g:UltiSnipsEditSplit = "vertical"
-ket g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsUsePythonVersion = 3
 
 "-------------------------
 " PLUGIN: Vimwiki

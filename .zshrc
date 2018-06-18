@@ -37,10 +37,18 @@ alias config='/usr/bin/git --git-dir=/Users/$USER/.cfg/ --work-tree=/Users/$USER
 alias v="/usr/local/bin/nvim"
 
 
-# Mirror vim configs
-ln -sf ~/.vim/ ~/.config/nvim/
-ln -f ~/.vimrc ~/.config/nvim/init.vim
-
-
 # Work specific stuffs
 alias bokus-dev="ssh netdavidj@mobil-dev.bokus.com"
+
+# Squash last X commits with a Commit message.
+# Usage: squash X 'COMMIT_MSG'
+# where X= Number of last commits.
+# where COMMIT_MSG= New commit msg.
+function squash () {
+  if [ -z "${1}" -o -z "${2}" ]; then
+    return 1
+  fi
+  git reset --soft HEAD~"$1"
+  git add -A && git commit -m "$2" # With 100 emoji
+  git push --force
+}
