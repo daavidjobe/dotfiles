@@ -5,11 +5,9 @@ endsnippet
 
 snippet rctcomp "React component" b
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 export default class $0 extends Component {
-	static propTypes = {}
-	
+
 	state = {}
 }
 endsnippet
@@ -17,13 +15,10 @@ endsnippet
 
 snippet rctfunc "React stateless component" b
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const $1 = ($2) => (
 	<div></div>
 )
-
-$1.propTypes = {}
 
 export default $1
 endsnippet
@@ -34,4 +29,9 @@ endsnippet
 
 snippet t "JSX tag" b
 <${1:div}>$2</$1>
+endsnippet
+
+snippet ifel "if-else block" b
+if ($1) {
+} else {$2}
 endsnippet

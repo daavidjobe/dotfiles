@@ -6,9 +6,8 @@ ZSH_THEME="spaceship"
 export ZSH=/Users/$USER/.oh-my-zsh
 
 # Rust
+export RUST_SRC_PATH="$HOME/.src/rust/src"
 export PATH="$HOME/.cargo/bin:$PATH"
-export RUST_SRC_PATH="$HOME/Projects/rust/src"
-
 
 # Go
 export GOROOT=/usr/local/opt/go/libexec
@@ -23,6 +22,8 @@ COMPLETION_WAITING_DOTS="true"
 
 export UPDATE_ZSH_DAYS=13
 
+export TERM=xterm-256color
+
 # Plugins
 plugins=(git)
 
@@ -31,14 +32,20 @@ plugins=(git)
 source "/Users/$USER/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 source $ZSH/oh-my-zsh.sh
 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
 
 # Aliases
 alias config='/usr/bin/git --git-dir=/Users/$USER/.cfg/ --work-tree=/Users/$USER'
 alias v="/usr/local/bin/nvim"
+alias v-conf="v ~/.config/nvim/init.vim"
 
-
-# Work specific stuffs
 alias bokus-dev="ssh netdavidj@mobil-dev.bokus.com"
+alias bokus-test="ssh davjob@test.bokus.com"
+alias tfat-dev="ssh tfat@167.99.250.63"
+alias trs-dev="ssh transportsedeln@31.216.36.106"
+alias ipeer="ssh ???"
+alias nessus="ssh root@209.97.136.189"
 
 # Squash last X commits with a Commit message.
 # Usage: squash X 'COMMIT_MSG'
@@ -49,6 +56,7 @@ function squash () {
     return 1
   fi
   git reset --soft HEAD~"$1"
-  git add -A && git commit -m "$2" # With 100 emoji
-  git push --force
+  git commit -am "$2"
 }
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
