@@ -12,9 +12,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
+Plug 'jacoborus/tender.vim'
 
 " JavaScript
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -37,9 +37,6 @@ Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' }
 " CSS
 Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
-
-" HTML
-Plug 'mattn/emmet-vim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
@@ -85,18 +82,16 @@ if has('mouse')
   set mouse=a
 endif
 
-colorscheme gruvbox
+colorscheme tender
 set background=dark
 
-let g:airline_theme='gruvbox'
+let g:airline_theme='tender'
 
-if (empty($TMUX))
-  if (has("nvim"))
+if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+endif
+if (has("termguicolors"))
+  set termguicolors
 endif
 
 map <leader>bg :let &background = (&background == "dark" ? "light" : "dark")<cr>
@@ -168,6 +163,7 @@ let g:airline_powerline_fonts = 1
 "-------------------------
 " PLUGIN: Ale
 " ------------------------
+
 let g:ale_fixers = {
  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
  \ 'javascript': ['eslint'],
@@ -178,6 +174,7 @@ let g:ale_fix_on_save = 1
 "-------------------------
 " PLUGIN: FZF
 " ------------------------
+
 let g:fzf_layout = { 'down': '~25%' }
 let g:ctrlp_map = ''
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
@@ -188,6 +185,7 @@ nnoremap <leader>fi :Ag<cr>
 "-------------------------
 " PLUGIN: NERDTree
 " ------------------------
+
 let NERDTreeShowHidden = 1
 
 function! NERDTreeToggleInCurDir()
@@ -215,12 +213,14 @@ nnoremap <leader>t :NERDTreeToggle<cr>
 "-------------------------
 " PLUGIN: Supertab
 " ------------------------
+
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
 
 "-------------------------
 " PLUGIN: UltiSnips
 " ------------------------
+
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
@@ -231,6 +231,7 @@ let g:UltiSnipsUsePythonVersion = 3
 "-------------------------
 " PLUGIN: Vimwiki
 " ------------------------
+
 let g:vimwiki_list = [{
         \ 'path': '~/Dropbox/my-wiki',
         \ 'syntax': 'markdown',
@@ -244,11 +245,13 @@ au FileType vimwiki set tabstop=2
 "-------------------------
 " PLUGIN: Goyo
 " ------------------------
+
 let g:goyo_width = 120
 
 "-------------------------
 " LANGUAGE: Rust
 " ------------------------
+
 let g:rustfmt_autosave = 1
 
 au FileType rust set expandtab
@@ -259,6 +262,7 @@ au FileType rust set tabstop=4
 "-------------------------
 " LANGUAGE: Javascript
 " ------------------------
+
 au FileType javascript set expandtab
 au FileType javascript set shiftwidth=2
 au FileType javascript set softtabstop=2
@@ -276,6 +280,7 @@ au FileType ruby set tabstop=2
 "-------------------------
 " LANGUAGE: JSON
 " ------------------------
+
 au FileType json set expandtab
 au FileType json set shiftwidth=2
 au FileType json set softtabstop=2
@@ -284,30 +289,16 @@ au FileType json set tabstop=2
 "-------------------------
 " LANGUAGE: Vimscript
 " ------------------------
+
 au FileType vim set expandtab
 au FileType vim set shiftwidth=4
 au FileType vim set softtabstop=4
 au FileType vim set tabstop=4
 
 "-------------------------
-" LANGUAGE: YAML
-" ------------------------
-au FileType yaml set expandtab
-au FileType yaml set shiftwidth=2
-au FileType yaml set softtabstop=2
-au FileType yaml set tabstop=2
-
-"-------------------------
-" LANGUAGE: TypeScript
-" ------------------------
-au FileType typescript set expandtab
-au FileType typescript set shiftwidth=4
-au FileType typescript set softtabstop=4
-au FileType typescript set tabstop=4
-
-"-------------------------
 " LANGUAGE: Bash
 " ------------------------
+
 au FileType sh set noexpandtab
 au FileType sh set shiftwidth=2
 au FileType sh set softtabstop=2
