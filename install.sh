@@ -3,3 +3,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 brew bundle
 
+gem install solargraph
+curl https://sh.rustup.rs -sSf | sh
+rustup component add rls-preview rust-analysis rust-src
