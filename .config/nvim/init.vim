@@ -2,7 +2,6 @@ set nocompatible
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
@@ -14,7 +13,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
-Plug 'jacoborus/tender.vim'
+Plug 'morhetz/gruvbox'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+            \ 'do': ':UpdateRemotePlugins',
+            \ 'branch': 'next'
+            \}
 
 " JavaScript
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -24,23 +28,19 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jason0x43/vim-js-indent'
 Plug 'elzr/vim-json'
 
-" Ruby
-Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'haml', 'eruby'] }
-Plug 'tpope/vim-rake', { 'for': 'ruby' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby', 'haml', 'coffee', 'javascript'] }
-Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
-Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-Plug 'Keithbsmiley/rspec.vim', { 'for': 'ruby' }
-Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' }
-
 " CSS
 Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-rails'
+
+let g:gruvbox_contrast_light = 'hard'
+let g:gruvbox_contrast_dark = 'hard'
 
 call plug#end()
 
@@ -82,10 +82,10 @@ if has('mouse')
   set mouse=a
 endif
 
-colorscheme tender
-set background=dark
+colorscheme gruvbox
+set background=light
 
-let g:airline_theme='tender'
+let g:airline_theme='gruvbox'
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -102,19 +102,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-" Fix some common typos
-
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
 
 " Navigation
 
@@ -147,15 +134,34 @@ vnoremap > >gv
 nnoremap z :terminal<cr>
 tnoremap <Leader>e <C-\><C-n>
 
+
+"-------------------------
+" PLUGIN: LanguageClient
+" ------------------------
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'ruby': ['solargraph', 'stdio']
+    \ }
+
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> C :call LanguageClient_contextMenu()<CR>
+
+"-------------------------
+" PLUGIN: Deoplete
+" ------------------------
+
+call deoplete#custom#source('_',
+            \ 'disabled_syntaxes', ['Comment', 'String'])
+
+let g:deoplete#enable_at_startup = 1
+
 "-------------------------
 " PLUGIN: Airline
 " ------------------------
-" Enable top tabline.
-let g:airline#extensions#tabline#enabled = 1
-
-" Disable showing tabs in the tabline. This will ensure that the buffers are
-" what is shown in the tabline at all times.
-let g:airline#extensions#tabline#show_tabs = 0
 
 " Enable powerline fonts.
 let g:airline_powerline_fonts = 1
@@ -165,9 +171,10 @@ let g:airline_powerline_fonts = 1
 " ------------------------
 
 let g:ale_fixers = {
- \ '*': ['remove_trailing_lines', 'trim_whitespace'],
- \ 'javascript': ['eslint'],
- \}
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'javascript': ['eslint'],
+  \ 'rust': ['rustfmt']
+  \}
 
 let g:ale_fix_on_save = 1
 
@@ -237,54 +244,21 @@ let g:vimwiki_list = [{
         \ 'syntax': 'markdown',
         \ 'ext': '.md'}]
 
-au FileType vimwiki set expandtab
-au FileType vimwiki set shiftwidth=2
-au FileType vimwiki set softtabstop=2
-au FileType vimwiki set tabstop=2
-
 "-------------------------
 " PLUGIN: Goyo
 " ------------------------
 
 let g:goyo_width = 120
 
+
 "-------------------------
 " LANGUAGE: Rust
 " ------------------------
-
-let g:rustfmt_autosave = 1
 
 au FileType rust set expandtab
 au FileType rust set shiftwidth=4
 au FileType rust set softtabstop=4
 au FileType rust set tabstop=4
-
-"-------------------------
-" LANGUAGE: Javascript
-" ------------------------
-
-au FileType javascript set expandtab
-au FileType javascript set shiftwidth=2
-au FileType javascript set softtabstop=2
-au FileType javascript set tabstop=2
-
-"-------------------------
-" LANGUAGE: Ruby
-" ------------------------
-
-au FileType ruby set expandtab
-au FileType ruby set shiftwidth=2
-au FileType ruby set softtabstop=2
-au FileType ruby set tabstop=2
-
-"-------------------------
-" LANGUAGE: JSON
-" ------------------------
-
-au FileType json set expandtab
-au FileType json set shiftwidth=2
-au FileType json set softtabstop=2
-au FileType json set tabstop=2
 
 "-------------------------
 " LANGUAGE: Vimscript
@@ -294,12 +268,3 @@ au FileType vim set expandtab
 au FileType vim set shiftwidth=4
 au FileType vim set softtabstop=4
 au FileType vim set tabstop=4
-
-"-------------------------
-" LANGUAGE: Bash
-" ------------------------
-
-au FileType sh set noexpandtab
-au FileType sh set shiftwidth=2
-au FileType sh set softtabstop=2
-au FileType sh set tabstop=2

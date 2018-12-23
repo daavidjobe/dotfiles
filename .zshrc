@@ -1,6 +1,6 @@
+[ -f ~/.sshbuddy.sh ] && source ~/.sshbuddy.sh
 
 # Setup
-
 
 ZSH_THEME="spaceship"
 export ZSH=/Users/$USER/.oh-my-zsh
@@ -27,7 +27,6 @@ export TERM=xterm-256color
 # Plugins
 plugins=(git)
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source "/Users/$USER/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 source $ZSH/oh-my-zsh.sh
@@ -40,12 +39,8 @@ alias config='/usr/bin/git --git-dir=/Users/$USER/.cfg/ --work-tree=/Users/$USER
 alias v="/usr/local/bin/nvim"
 alias v-conf="v ~/.config/nvim/init.vim"
 
-alias bokus-dev="ssh netdavidj@mobil-dev.bokus.com"
-alias bokus-test="ssh davjob@test.bokus.com"
-alias tfat-dev="ssh tfat@167.99.250.63"
-alias trs-dev="ssh transportsedeln@31.216.36.106"
-alias ipeer="ssh ???"
-alias nessus="ssh root@209.97.136.189"
+alias tmux='tmux -u'
+
 
 # Squash last X commits with a Commit message.
 # Usage: squash X 'COMMIT_MSG'
