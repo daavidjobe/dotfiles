@@ -155,7 +155,7 @@ nnoremap <silent> C :call LanguageClient_contextMenu()<CR>
 " ------------------------
 
 call deoplete#custom#source('_',
-            \ 'disabled_syntaxes', ['Comment', 'String'])
+    \ 'disabled_syntaxes', ['Comment', 'String'])
 
 let g:deoplete#enable_at_startup = 1
 
