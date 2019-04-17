@@ -6,19 +6,21 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
+Plug 'jparise/vim-graphql'
+
+Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vimwiki/vimwiki'
+
 Plug 'w0rp/ale'
-Plug 'morhetz/gruvbox'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'autozimu/LanguageClient-neovim', {
-            \ 'do': ':UpdateRemotePlugins',
-            \ 'branch': 'next'
-            \}
+Plug 'sebastianmarkow/deoplete-rust'
 
 " JavaScript
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -27,6 +29,7 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jason0x43/vim-js-indent'
 Plug 'elzr/vim-json'
+Plug 'posva/vim-vue'
 
 " CSS
 Plug 'hail2u/vim-css3-syntax'
@@ -34,6 +37,7 @@ Plug 'cakebaker/scss-syntax.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
@@ -53,6 +57,7 @@ set title
 set ruler
 set list
 set hidden
+set signcolumn=yes
 
 set backspace=indent,eol,start
 set autoread
@@ -73,9 +78,12 @@ set shiftwidth=2
 set autoindent
 set smartindent
 
+" Permanent undo
+set undodir=~/.vimdid
+set undofile
+
 :tnoremap <Esc> <C-\><C-n>
 
-" LEADER
 let mapleader = ','
 
 if has('mouse')
@@ -83,12 +91,13 @@ if has('mouse')
 endif
 
 colorscheme gruvbox
-set background=light
+set background=dark
+let base16colorspace=256
 
 let g:airline_theme='gruvbox'
 
 if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 endif
 if (has("termguicolors"))
   set termguicolors
@@ -135,20 +144,9 @@ nnoremap z :terminal<cr>
 tnoremap <Leader>e <C-\><C-n>
 
 
-"-------------------------
-" PLUGIN: LanguageClient
-" ------------------------
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <c-^>
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'ruby': ['solargraph', 'stdio']
-    \ }
-
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> C :call LanguageClient_contextMenu()<CR>
 
 "-------------------------
 " PLUGIN: Deoplete
@@ -158,6 +156,9 @@ call deoplete#custom#source('_',
     \ 'disabled_syntaxes', ['Comment', 'String'])
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#rust#racer_binary = '$HOME/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path = '$RUST_SRC_PATH'
+
 
 "-------------------------
 " PLUGIN: Airline
@@ -173,21 +174,31 @@ let g:airline_powerline_fonts = 1
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'javascript': ['eslint'],
+  \ 'ruby': ['rubocop'],
   \ 'rust': ['rustfmt']
   \}
 
-let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 0
+let g:ale_rust_cargo_use_check = 1
+"let g:ale_rust_cargo_check_all_targets = 1
 
 "-------------------------
 " PLUGIN: FZF
 " ------------------------
 
 let g:fzf_layout = { 'down': '~25%' }
-let g:ctrlp_map = ''
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
+if executable('rg')
+	set grepprg=rg\ --no-heading\ --vimgrep
+	set grepformat=%f:%l:%c:%m
+endif
+
+
 nnoremap <leader>ff :Files<cr>
-nnoremap <leader>fi :Ag<cr>
+nnoremap <leader>s :Rg<cr>
 
 "-------------------------
 " PLUGIN: NERDTree
@@ -233,7 +244,6 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsUsePythonVersion = 3
 
 "-------------------------
 " PLUGIN: Vimwiki
@@ -254,6 +264,11 @@ let g:goyo_width = 120
 "-------------------------
 " LANGUAGE: Rust
 " ------------------------
+
+nnoremap <leader>rf :RustFmt<cr>
+nnoremap <leader>rr :Cargo run<cr>
+nnoremap <leader>rt :Cargo test<cr>
+
 
 au FileType rust set expandtab
 au FileType rust set shiftwidth=4
